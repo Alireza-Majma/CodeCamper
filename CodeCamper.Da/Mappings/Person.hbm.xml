@@ -1,0 +1,22 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Model_CodeCamper_NH.Entities" assembly="Model_CodeCamper_NH">
+  <class name="Person" table="Person" dynamic-update="true">
+    <id name="Id" column="`ID`" type="int" unsaved-value="0">
+      <generator class="native" />
+    </id>
+
+    <property name="LastName" type="string" length="30" not-null="true" />
+    <property name="FirstName" type="string" length="30" not-null="true" />
+    <property name="Email" type="string" length="30" />
+    <property name="Blog" type="string" length="25" />
+    <property name="Twitter" type="String" />
+    <property name="Gender" type="String" />
+    <property name="ImageSource" type="string" length="60" />
+    <property name="Bio" type="string" length="150" />
+
+    <set name="SpeakerSessions" table="`Session`" cascade="all-delete-orphan" inverse="true">
+      <key column="SpeakerId" foreign-key="Person_SpeakerId" />
+      <one-to-many class="Session" />
+    </set>
+    
+  </class>
+</hibernate-mapping>

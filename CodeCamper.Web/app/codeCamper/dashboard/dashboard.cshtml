@@ -1,0 +1,104 @@
+﻿<section id="dashboard-view" class="mainbar" data-ng-controller="dashboard as vm">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="today-datas">
+                        <li class="blightblue">
+                            <div class="pull-left"><i class="fa fa-plane"></i></div>
+                            <div class="datas-text pull-right">
+                                <span class="bold">May 18 - 19, 2015</span> Castle Resort, Neverland
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+
+                        <li class="borange">
+                            <a href="#/sessions"></a>
+                            <div class="pull-left"><i class="fa fa-envelope"></i></div>
+                            <div class="datas-text pull-right">
+                                <span class="bold">{{vm.sessionCount}}</span> Sessions
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+                        <li class="bgreen">
+                            <a href="#/speakers"></a>
+                            <div class="pull-left"><i class="fa fa-microphone"></i></div>
+                            <div class="datas-text pull-right">
+                                <span class="bold">{{vm.speakerCount}}</span> Speakers
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+                        <li class="bviolet">
+                            <a href="#/attendees"></a>
+                            <div class="pull-left"><i class="fa fa-group"></i></div>
+                            <div class="datas-text pull-right">
+                                <span class="bold">{{vm.attendeeCount}}</span> Attendees
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8  col-md-offset-2">
+                    <div class="widget wlightblue">
+                        <div data-cc-widget-header title="{{vm.topSpeakerCarousel.title}}"
+                             allow-collapse="true"></div>
+                        <div class="widget-content ">
+                            <uib-carousel interval="3000">
+                                <uib-slide data-ng-repeat="s in vm.topSpeakerCarousel.topList">
+                                    <img data-cc-img-person="{{s.speaker.imageSource}}" class="img-polaroid" style="margin:auto;" />
+                                    <div class="widget-foot">
+                                        <h4>{{s.rank}}th: {{s.speaker.fullName}}({{s.sessionCount}})</h4>
+                                    </div>
+                                </uib-slide>
+                            </uib-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="widget wviolet">
+                        <div data-cc-widget-header title="{{vm.content.title}}"
+                             allow-collapse="true"></div>
+                        <div class="widget-content ">
+                            <div>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th><a data-ng-click="vm.content.setSort('track')">Track</a></th>
+                                            <th><a data-ng-click="vm.content.setSort('count')">Sessions</a></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr data-ng-repeat="t in vm.content.tracks| orderBy:vm.content.predicate:vm.content.reverse">
+                                            <td>{{t.track}}</td>
+                                            <td>{{t.total}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="widget wgreen">
+                        <div data-cc-widget-header title="{{vm.news.title}}"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <small>{{vm.news.description}}</small>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

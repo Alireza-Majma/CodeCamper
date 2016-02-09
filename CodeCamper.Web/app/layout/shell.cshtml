@@ -1,0 +1,29 @@
+﻿<div data-ng-controller="shell as vm">
+    <div class="navbar " style="background: url('../../Content/images/code.png'); width:100%; padding-right:30px;">
+        <a href="" id="menu-toggle-1" class="navbar-brand glyphicon glyphicon-step-backward fa-2x" data-ng-click="vm.toggleState(1)"></a>
+        <a href="" id="menu-toggle-2" class="navbar-brand glyphicon glyphicon-step-backward fa-2x" data-ng-click="vm.toggleState(2)"></a>
+        <a class="navbar-brand lead" href="#"><img style="display:inline-block;" src="./Content/images/icon.png" />&nbsp;&nbsp;&nbsp;Code Camper</a>
+    </div>
+    <section id="content" class="content">
+        <div data-ng-show="vm.isBusy" class="page-splash ">@*dissolve-animation*@
+            <div data-cc-spinner="vm.spinnerOperations"></div>
+            <div class="page-splash-message page-splash-message-subtle">{{vm.busyMessage}}</div>
+        </div>
+        <div id="wrapper" data-ng-class="vm.toggledClass">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+                    <li data-ng-repeat="r in vm.navRoutes" data-ng-class="vm.isCurrent(r)">
+                        <a href="#{{r.url}}" class="" data-ng-bind-html="r.settings.content"></a>
+                    </li>
+                </ul>
+            </div><!-- /#sidebar-wrapper -->
+            <!-- Page Content -->
+            <div id="page-content-wrapper" data-ng-view class="shuffle-animation">
+            </div>
+            <!-- /#page-content-wrapper -->
+        </div>
+        <!-- /#wrapper -->
+    </section>
+    
+</div>

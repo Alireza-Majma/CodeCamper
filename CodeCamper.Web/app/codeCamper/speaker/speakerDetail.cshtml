@@ -1,0 +1,85 @@
+﻿@model CodeCamper.Da.Person
+@{var speaker = Html.Angular().ModelFor("vm.speaker");}
+
+<section class="mainbar" data-ng-controller="speakerDetail as vm">
+    <section class="matter">
+        <div class="container-fluid">
+            <div>
+                <button class="btn btn-info"
+                        data-ng-click="vm.goBack()">
+                    <i class="glyphicon glyphicon-hand-left"></i>Back
+                </button>
+                <button class="btn btn-info"
+                        data-ng-click="vm.reset()"
+                        data-ng-disabled="!vm.canSave()">
+                    <i class="glyphicon glyphicon-eject"></i>Reset
+                </button>
+                <button class="btn btn-info"
+                        data-ng-click="vm.save()"
+                        data-ng-disabled="!vm.canSave()">
+                    <i class="glyphicon glyphicon-save "></i>Save
+                </button>
+                <span class="dissolve-animation" data-ng-show="vm.hasChanges">
+                    <i class="glyphicon glyphicon-asterisk fa-2x ng-animate"></i>
+                </span>
+            </div>
+            <div class="widget wgreen">
+                <div data-cc-widget-header title="{{vm.mode }} @speaker.BindingFor(x=> x.FullName)"></div>
+                <div class="widget-content user">
+                    <div class="row">
+                        <form class="form-horizontal">
+
+                            @speaker.FormGroupFor(x => x.FirstName);
+                                @speaker.FormGroupFor(x => x.LastName);
+                                @speaker.FormGroupFor(x => x.Gender);
+                                @speaker.FormGroupFor(x => x.Email);
+                                @speaker.FormGroupFor(x => x.Blog);
+                                @speaker.FormGroupFor(x => x.Twitter);
+                                @speaker.FormGroupFor(x => x.Bio);
+                                @speaker.FormGroupFor(x => x.ImageSource);
+
+                            @*<formgroup label="@speaker.DisplayNameFor(x => x.FirstName)"
+                                         ng-model="@speaker.ExpressionFor(x => x.FirstName)" z-validate></formgroup>
+                            <formgroup label="@speaker.DisplayNameFor(x => x.LastName)"
+                                         ng-model="@speaker.ExpressionFor(x => x.LastName)" z-validate></formgroup>
+                            <formgroup label="@speaker.DisplayNameFor(x => x.Email)"
+                                         ng-model="@speaker.ExpressionFor(x => x.Email)" z-validate></formgroup>
+                            <formgroup label="@speaker.DisplayNameFor(x => x.Blog)"
+                                         ng-model="@speaker.ExpressionFor(x => x.Blog)" z-validate></formgroup>
+                            <formgroup label="@speaker.DisplayNameFor(x => x.Twitter)"
+                                         ng-model="@speaker.ExpressionFor(x => x.Twitter)" z-validate></formgroup>
+                            <formgroup label="@speaker.DisplayNameFor(x => x.Bio)"
+                                         ng-model="@speaker.ExpressionFor(x => x.Bio)" z-validate></formgroup>
+                            <formgroup label="@speaker.DisplayNameFor(x => x.ImageSource)"
+                                         ng-model="@speaker.ExpressionFor(x => x.ImageSource)" type="file" misc='accept="image/*"'></formgroup>*@
+                            <div class="form-group ng-valid">
+                                <div class="col-sm-10 col-sm-offset-2">
+                                    <img data-cc-img-person="@speaker.BindingFor(x=> x.ImageSource)" class="img-polaroid" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="panel panel-default row">
+                        <div class="panel-heading ">
+                            <h3 ng-show="@speaker.ExpressionFor(x=> x.SpeakerSessions.Count)!=0">Sessions</h3>
+                            <h3 ng-show="@speaker.ExpressionFor(x=> x.SpeakerSessions.Count)==0">There is no Sessions</h3>
+                        </div>
+
+                        <div class="panel-body">
+                            @using (var session = speaker.Repeat(x => x.SpeakerSessions, "session"))
+                            {
+                                <div class="list-group col-sm-6">
+
+                                    <a href="#/session/@session.BindingFor(x => x.Id)" class="list-group-item active">
+                                        <h4 class="list-group-item-heading">@session.BindingFor(x => x.Title)</h4>
+                                        <p class="list-group-item-text">@session.BindingFor(x => x.Tags)</p>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

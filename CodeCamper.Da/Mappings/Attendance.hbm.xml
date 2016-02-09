@@ -1,0 +1,17 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Model_CodeCamper_NH.Entities" assembly="Model_CodeCamper_NH">
+  <class name="Attendance" table="Attendance" dynamic-update="true">
+    <composite-id>
+      <key-property name="PersonId" column="PersonId" type="int" />
+      <key-property name="SessionId" column="SessionId" type="int" />
+    </composite-id>
+    
+    <property name="PersonId" column="`PersonId`" type="int" insert="false" update="false"  />
+    <many-to-one name="Person" column="`PersonId`" class="Person" foreign-key="Person_PersonId"/>
+    
+    <property name="SessionId" column="`SessionId`" type="int" insert="false" update="false" />
+    <many-to-one name="Session" column="`SessionId`" class="Session" foreign-key="Session_SessionId"/>
+    
+    <property name="Rating" type="int" />
+    <property name="Text" type="string" length="600" />
+  </class>
+</hibernate-mapping>

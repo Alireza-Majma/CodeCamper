@@ -1,0 +1,48 @@
+﻿<section class="mainbar" data-ng-controller="sessions as vm">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="form-search">
+                    <input class="input-meduim search-query"
+                           data-ng-model="vm.searchText"
+                           data-ng-keyup="vm.search($event)"
+                           placeholder="live search ..." />
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-info" data-ng-click="vm.refresh()"><i class=" glyphicon glyphicon-refresh"></i><span>Refresh</span></a>
+                        <a href="#/session/new" class="btn btn-info">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <span>Add Session</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="widget worange">
+                    <div data-cc-widget-header title="{{vm.title}}"
+                         subtitle="{{vm.filteredList.length}}/{{vm.totalItemLoaded}}">
+                    </div>
+                    <div class="widget-content user">
+                        <div class="padd" data-ng-repeat="s in vm.filteredList">
+                            <div class="user" ng-click="vm.gotoSession(s)" title="Go to session detail">
+                                <img data-cc-img-person="{{s.speaker.imageSource}}" class="img-polaroid user-pic" />
+                                <div class="user-details">
+                                    <small>{{s.timeSlot.getName()}}</small> at <small>{{s.room.name}}</small>
+                                    <small class="right hidden-xs">{{s.level}}</small>
+                                    <small class="right hidden-xs">{{s.track.name}}</small>
+                                    <small class="right hidden-xs">{{s.code}}</small>
+                                    <h3>{{s.title}}</h3>
+                                    <h6>{{s.speaker.fullName}} </h6>
+                                    <small class="text-subtle right hidden-xs">{{s.tagsFormatted}}</small>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

@@ -1,0 +1,40 @@
+﻿<section class="mainbar" data-ng-controller="speakers as vm">
+    <section class="matter">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="form-search">
+                    <input class="input-meduim search-query"
+                           data-ng-model="vm.searchText"
+                           data-ng-keyup="vm.search($event)"
+                           placeholder="live search ..." />
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-info" data-ng-click="vm.refresh()"><i class="glyphicon glyphicon-refresh"></i><span>Refresh</span></a>
+                        <a href="#/speaker/new" class="btn btn-info" >
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <span>Add Speaker</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="widget wviolet">
+                    <div data-cc-widget-header title="{{vm.title}}" subtitle="{{vm.filteredList.length}} / {{vm.totalItemLoaded}}"></div>
+                    <div class="widget-content user">
+                        <div class="padd list-flow" data-ng-repeat="s in vm.filteredList" ng-click="vm.gotoSpeaker(s)">
+                            <div class="user" title="Go to speaker detail">
+                                <img data-cc-img-person="{{s.imageSource}}" class="img-polaroid stacked" />
+                                <div class="name-stack">
+                                    <h5>{{s.firstName}} {{s.lastName}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

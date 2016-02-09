@@ -1,0 +1,48 @@
+﻿<section class="mainbar" data-ng-controller="sessionDetail as vm">
+    <section class="matter">
+        <div class="container-fluid">
+            <div>
+                <button class="btn btn-info"
+                        data-ng-click="vm.goBack()">
+                    <i class="glyphicon glyphicon-hand-left"></i>Back
+                </button>
+                <button class="btn btn-info"
+                        data-ng-click="vm.reset()"
+                        data-ng-disabled="!vm.canSave()">
+                    <i class="glyphicon glyphicon-eject"></i>Reset
+                </button>
+                <button class="btn btn-info"
+                        data-ng-click="vm.save()"
+                        data-ng-disabled="!vm.canSave()">
+                    <i class="glyphicon glyphicon-save "></i>Save
+                </button>
+                <button class="btn btn-danger"
+                        data-ng-click="vm.deleteEntity()" 
+                        data-ng-show="vm.canDelete()">
+                    <i class="glyphicon glyphicon-trash "></i>Delete
+                </button>
+                <span class="dissolve-animation" data-ng-show="vm.hasChanges">
+                    <i class="glyphicon glyphicon-asterisk fa-2x ng-animate"></i>
+                </span>
+            </div>
+            <div class="widget wgreen">
+                <div data-cc-widget-header title="{{vm.getTitle()}}"></div>
+                <div class="widget-content user">
+                    <div class="row">
+                        <form class="form-horizontal">
+                            <formgroup label="Title" ng-model="vm.session.title" z-validate></formgroup>
+                            <formgroup label="Code" ng-model="vm.session.code" z-validate></formgroup>
+                            <formgroup label="Level" ng-model="vm.session.level" z-validate></formgroup>
+                            <formgroup label="Tags" ng-model="vm.session.tags" z-validate></formgroup>
+                            <formgroup label="Description" ng-model="vm.session.description" z-validate></formgroup>
+                            <formgroup label="Speaker" ng-model="vm.session.speaker" select-options="s.fullName for s in vm.speakers" z-validate></formgroup>
+                            <formgroup label="Room" ng-model="vm.session.room" select-options="r.name for r in vm.rooms" z-validate></formgroup>
+                            <formgroup label="Track" ng-model="vm.session.track" select-options="t.name for t in vm.tracks" z-validate></formgroup>
+                            <formgroup label="TimeSlot" ng-model="vm.session.timeSlot" select-options="t.name for t in vm.timeSlots" z-validate></formgroup>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

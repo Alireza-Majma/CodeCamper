@@ -1,0 +1,30 @@
+﻿<section class="mainbar" data-ng-controller="personDetail as vm">
+    <section class="matter">
+        <div class="container">
+            <div class="widget wgreen">
+                <div data-cc-widget-header title="{{vm.title}}"></div>
+                <div style="text-align:left">
+                    <button class="btn btn-info" data-ng-click="vm.reset(vm.person)">
+                        <i class="glyphicon glyphicon-refresh"></i>Reset person
+                    </button>
+                    <button class="btn btn-info" data-ng-click="vm.save(vm.person)">
+                        <i class="glyphicon glyphicon-save"></i>Save person
+                    </button>
+                    <button class="btn btn-info" data-ng-click="vm.goBack()">
+                        <i class="glyphicon glyphicon-backward"></i>Go Back
+                    </button>
+                </div>
+                <div class="row">
+                    <form class="form-horizontal">
+                        <formgroup label="FirstName" ng-model="vm.person.firstName"></formgroup>
+                        <formgroup label="LastName" ng-model="vm.person.lastName"></formgroup>
+                        <formgroup label="Email" ng-model="vm.person.email"></formgroup>
+                        <formgroup label="Blog" ng-model="vm.person.blog"></formgroup>
+                        <formgroup label="Twitter" ng-model="vm.person.twitter"></formgroup>
+                        <formgroup label="Bio" ng-model="vm.person.bio"></formgroup>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

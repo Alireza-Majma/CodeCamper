@@ -1,0 +1,17 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Model_CodeCamper_NH.Entities" assembly="Model_CodeCamper_NH">
+  <class name="TimeSlot" table="TimeSlot" dynamic-update="true">
+    <id name="Id" column="`ID`" type="int" unsaved-value="0">
+      <generator class="native" />
+    </id>
+
+    <property name="Start" type="Timestamp" not-null="true" />
+    <property name="IsSessionSlot" type="bool" />
+    <property name="Duration" type="int" not-null="true" />
+    
+    <!--<set name="Sessions" table="`Session`" cascade="all-delete-orphan" inverse="true">
+      <key column="TimeSlotId" foreign-key="Session_TimeSlot" />
+      <one-to-many class="Session" />
+    </set>-->
+    
+  </class>
+</hibernate-mapping>

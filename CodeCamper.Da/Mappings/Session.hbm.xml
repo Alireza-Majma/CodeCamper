@@ -1,0 +1,26 @@
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Model_CodeCamper_NH.Entities" assembly="Model_CodeCamper_NH">
+  <class name="Session" table="Session" dynamic-update="true">
+    <id name="Id" column="`ID`" type="int" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    
+    <property name="Title" type="string" length="30" not-null="true" />
+    <property name="Code" type="string" length="10" not-null="true" />
+    <property name="SpeakerId" type="int" insert="false" update="false" />
+    <many-to-one name="Speaker" column="`SpeakerId`" class="Person" />
+    <property name="TrackId" type="int" insert="false" update="false" />
+    <many-to-one name="Track" column="TrackId" class="Track" foreign-key="Track_TrackId" />
+    <property name="TimeSlotId" type="int" insert="false" update="false" />
+    <many-to-one name="TimeSlot" column="TimeSlotId" class="TimeSlot" />
+    <property name="RoomId" type="int" insert="false" update="false" />
+    <many-to-one name="Room" column="RoomId" class="Room"  foreign-key="Room_RoomId"/>
+    <property name="Level" type="String" />
+    <property name="Tags" type="string" length="60" />
+    <property name="Description" type="string" length="250" />
+
+    <set name="AttendanceList" table="`Attendance`" cascade="all-delete-orphan" inverse="true">
+      <key column="SeasionId" foreign-key="Session_SeasionId" />
+      <one-to-many class="Attendance" />
+    </set>
+  </class>
+</hibernate-mapping>

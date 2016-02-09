@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html style="background-color:black; width:100%; height:100%" data-ng-app="app" >
+<head>
+    <title data-ng-bind="title">Code Camper Application</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/simple-sidebar.css" rel="stylesheet" />
+    <link href="Content/font-awesome.css" rel="stylesheet" />
+    <link href="Content/toastr.css" rel="stylesheet" />
+    <link href="Content/ui-grid.css" rel="stylesheet" />
+    <link href="Content/breeze.directives.css" rel="stylesheet" />
+    <link href="Content/customStyles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div data-ng-include="'/app/layout/shell'"></div>
+
+    <script src="Scripts/jquery-2.1.4.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/angular-animate.js"></script>
+    <script src="Scripts/angular-resource.js"></script>
+    <script src="Scripts/angular-sanitize.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="Scripts/ui-grid.js"></script>
+    <script src="Scripts/toastr.js"></script>
+    <script src="Scripts/spin.js"></script>
+    <script src="Scripts/moment.js"></script>
+
+    <!-- Bootstrapping -->
+    <script src="app/config/app.module.js"></script>
+    <script src="app/common/common.module.js"></script>
+    <script src="app/common/commonConfig.js"></script>
+    <script src="app/common.bootstrap/common.bootstrap.module.js"></script>
+    <script src="app/codeCamper/config/codeCamper.module.js"></script>
+    <script src="app/config/app.config.js"></script>
+    <script src="app/codeCamper/config/codeCamper.config.route.js"></script>
+
+    <!-- common Modules -->
+    <script src="app/common/common.js"></script>
+    <script src="app/common/logger.js"></script>
+    <script src="app/common/spinner.js"></script>
+
+    <!-- common.bootstrap Modules -->
+    <script src="app/common.bootstrap/bootstrap.dialog.js"></script>
+
+    <!-- Breeze-->
+    <script src="Scripts/breeze.debug.js"></script>
+    <script src="Scripts/breeze.bridge.angular.js"></script>
+    <script src="Scripts/breeze.directives.js"></script>
+    <script src="Scripts/breeze.saveErrorExtensions.js"></script>
+
+    <!--Services -->
+    <script src="app/layout/shell.js"></script>
+    <script src="app/services/routemediator.js"></script>
+    <script src="app/services/entityManagerFactory.js"></script>
+    <script src="app/services/model.js"></script>
+    <script src="app/services/modelValidation.js"></script>
+
+    <!--Directives -->
+    <script src="app/directives/cc-inputDirective.js"></script>
+    <script src="app/directives/cc-img-person.js"></script>
+    <script src="app/directives/cc-menu-item-rendered.js"></script>
+    <script src="app/directives/cc-scroll-to-top.js"></script>
+    <script src="app/directives/cc-sidebar.js"></script>
+    <script src="app/directives/cc-spinner.js"></script>
+    <script src="app/directives/cc-widget-close.js"></script>
+    <script src="app/directives/cc-widget-header.js"></script>
+    <script src="app/directives/cc-widget-minimize.js"></script>
+    
+
+    <!--Repository -->
+    <script src="app/codeCamper/repository/baseRepository.js"></script>
+    <script src="app/codeCamper/repository/miscRepository.js"></script>
+    <script src="app/codeCamper/repository/sessionsRepository.js"></script>
+    <script src="app/codeCamper/repository/personsRepository.js"></script>
+
+    <!--controllers -->
+    <script src="app/codeCamper/dashboard/dashboard.js"></script>
+    <script src="app/codeCamper/admin/admin.js"></script>
+    <script src="app/codeCamper/attendee/attendees.js"></script>
+    <script src="app/codeCamper/person/persons.js"></script>
+    <script src="app/codeCamper/person/personDetail.js"></script>
+    <script src="app/codeCamper/session/sessions.js"></script>
+    <script src="app/codeCamper/speaker/speakers.js"></script>
+    <script src="app/codeCamper/speaker/speakerDetail.js"></script>
+    <script src="app/codeCamper/session/sessionDetail.js"></script>
+</body>
+</html>

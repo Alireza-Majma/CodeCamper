@@ -1,0 +1,54 @@
+﻿<section class="mainbar" data-ng-controller="attendees as vm">
+    <section class="matter">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="form-search">
+                    <input class="input-meduim search-query"
+                           data-ng-model="vm.searchText"
+                           data-ng-keyup="vm.search($event)"
+                           placeholder="live search ..." />
+                    <div class="btn-group pull-right">
+                        <a class="btn btn-info" data-ng-click="vm.refresh()"><i class="glyphicon glyphicon-refresh"></i><span>Refresh</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="widget wgreen">
+                    <div data-cc-widget-header title="{{vm.title}}"
+                         subtitle="{{vm.paging.filteredCount}} / {{vm.totalItemLoaded}}"
+                         right-text="Page {{vm.paging.currentPage}} of {{vm.paging.pageCount()}}"></div>
+                    <div class="widget-content user">
+                        <div class="padd list-flow" data-ng-repeat="a in vm.attendeeList">
+                            <div class="user">
+                                <img data-cc-img-person="{{a.imageSource}}" class="img-polaroid stacked" />
+                                <div class="name-stack">
+                                    <h5>{{a.firstName}} {{a.lastName}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-foot">
+                        <div class="clearfix"></div>
+                        <div>
+                            <uib-pagination ng-model="vm.paging.currentPage"
+                                            boundary-links="true"
+                                            ng-change="vm.pageChanged(page)"
+                                            total-items="vm.paging.filteredCount"
+                                            items-per-page="vm.paging.pagesize"
+                                            page="vm.paging.currentPage"
+                                            max-size="vm.paging.maxPagesToShow"
+                                            class="pagination-sm"
+                                            previous-text="Prev"
+                                            next-text="Next"
+                                            first-text="First"
+                                            last-text="Last">
+                            </uib-pagination>
+                        </div>
+                        
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
