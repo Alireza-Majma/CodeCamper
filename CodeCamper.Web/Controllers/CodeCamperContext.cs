@@ -1,5 +1,6 @@
 ﻿using Breeze.ContextProvider.NH;
 using CodeCamper.Da;
+using CodeCamper.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace CodeCamper.Controllers
 {
     public class CodeCamperContext : NHContext
     {
-        public CodeCamperContext() : base(NHConfig.OpenSession()) { }
+        public CodeCamperContext() : base(NHConfig.OpenSession(MvcApplication.sulPath)) { }
         
         public CodeCamperContext Context
         {

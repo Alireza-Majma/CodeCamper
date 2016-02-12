@@ -2,6 +2,8 @@
 using CodeCamper.Da;
 using NHibernate;
 using NHibernate.Cfg;
+using System.IO;
+using System;
 
 namespace CodeCamper.Da
 {
@@ -9,17 +11,13 @@ namespace CodeCamper.Da
     {
         private static Configuration _configuration;
         private static ISessionFactory _sessionFactory;
-
-        static NHConfig()
-        {
-            NHConfigFluentSqlCe();
-        }
-
-        static void NHConfigFluentSqlCe()
+        
+        static ISessionFactory NHConfigFluentSqlCe(string sulPath=null)
         {
             var modelAssembly = typeof(Person).Assembly;
-            string path = @"C:\temp\CodeCamper\CodeCamper.Da\AppData";
-            var conStr = string.Format(@"Data Source={0}\CodeCamper.sdf", path);
+            //string path = @"C:\temp\CodeCamper\CodeCamper.Da\AppData";
+            string appDataPath = Path.Combine(Directory.GetParent(sulPath).FullName, System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, @"AppData");
+            var conStr = string.Format(@"Data Source={0}\CodeCamper.sdf", appDataPath);
             //@"Data Source=|DataDirectory|\CodeCamper.sdf";
             _configuration = new NHibernate.Cfg.Configuration();
 
@@ -35,6 +33,7 @@ namespace CodeCamper.Da
             factory.Mappings(m => m.FluentMappings.AddFromAssembly(modelAssembly));
             //.ExposeConfiguration(cfg => new SchemaExport(cfg).Create(true, false))
             _sessionFactory = factory.BuildSessionFactory();
+            return _sessionFactory;
         }
 
         static void NHConfigXml()
@@ -43,12 +42,12 @@ namespace CodeCamper.Da
             var conStr = @"Data Source=|DataDirectory|\CodeCamper.sdf";
 
             _configuration = new Configuration();
-            _configuration.Properties[Environment.ConnectionProvider] = "NHibernate.Connection.DriverConnectionProvider";
-            _configuration.Properties[Environment.Dialect] = "NHibernate.Dialect.FixedMsSqlCe40Dialect, CodeCamper.Da";
-            _configuration.Properties[Environment.ConnectionDriver] = "NHibernate.Driver.SqlServerCeDriver";
-            _configuration.Properties[Environment.ConnectionString] = conStr;//"CodeCamperConnection";
-            _configuration.Properties[Environment.ShowSql] = "true";
-            _configuration.Properties[Environment.DefaultBatchFetchSize] = "32";
+            _configuration.Properties[NHibernate.Cfg.Environment.ConnectionProvider] = "NHibernate.Connection.DriverConnectionProvider";
+            _configuration.Properties[NHibernate.Cfg.Environment.Dialect] = "NHibernate.Dialect.FixedMsSqlCe40Dialect, CodeCamper.Da";
+            _configuration.Properties[NHibernate.Cfg.Environment.ConnectionDriver] = "NHibernate.Driver.SqlServerCeDriver";
+            _configuration.Properties[NHibernate.Cfg.Environment.ConnectionString] = conStr;//"CodeCamperConnection";
+            _configuration.Properties[NHibernate.Cfg.Environment.ShowSql] = "true";
+            _configuration.Properties[NHibernate.Cfg.Environment.DefaultBatchFetchSize] = "32";
             _configuration.AddAssembly(modelAssembly);  // mapping is in this assembly
             _sessionFactory = _configuration.BuildSessionFactory();
         }
@@ -57,9 +56,25 @@ namespace CodeCamper.Da
             get { return _configuration; }
         }
 
-        public static ISession OpenSession()
+        private static object syncRoot = new Object();
+
+        
+        public static ISessionFactory GetSessionFactory(string sulPath)
         {
-            ISession session = _sessionFactory.OpenSession();
+            if (_sessionFactory == null)
+            {
+                lock (syncRoot)
+                {
+                    if (_sessionFactory == null)
+                        _sessionFactory = NHConfigFluentSqlCe(sulPath);
+                }
+            }
+            return _sessionFactory;
+        }
+
+        public static ISession OpenSession(string sulPath = null)
+        {
+            ISession session = GetSessionFactory(sulPath).OpenSession();
             return session;
         }
     }
