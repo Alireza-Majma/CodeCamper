@@ -5,6 +5,7 @@ var App;
     (function (CodeCamper) {
         var BaseRepository = (function () {
             function BaseRepository(breeze, emFactory, common, model, config) {
+                var _this = this;
                 this.breeze = breeze;
                 this.emFactory = emFactory;
                 this.common = common;
@@ -13,6 +14,11 @@ var App;
                 this.storeCache = {
                     totalLoaded: {},
                     isLoaded: {}
+                };
+                this.queryFailed = function (error) {
+                    var msg = _this.config.appErrorPrefix + "Error retrieving Data" + error.message;
+                    _this.logError(msg, error);
+                    throw error;
                 };
                 this.logger = this.common.logger;
                 this.entityQuery = this.breeze.EntityQuery;
@@ -154,12 +160,6 @@ var App;
             BaseRepository.prototype.logSuccessMessage = function (resourceName, resultlength, isLocal) {
                 var message = 'Retrieved [' + resourceName + '] from ' + (isLocal ? " Local" : "Remote") + ' resource';
                 this.logSuccess(message, resultlength, true);
-            };
-            BaseRepository.prototype.queryFailed = function (error) {
-                //var msg = this.config.appErrorPrefix + "Error retrieving Data" + error.message;
-                var msg = this.config.appErrorPrefix + "Error retrieving Data" + error.message;
-                this.logError(msg, error);
-                throw error;
             };
             BaseRepository.serviceId = 'baseRepository';
             //#endregion

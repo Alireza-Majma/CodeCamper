@@ -49,7 +49,7 @@ module App.CodeCamper {
       isNullObject: boolean;
       resourceNames: appShared.IResourceNames;
       entityNames: appShared.IEntityNames;
-
+      appErrorPrefix: string;
       //#endregion
       //#region constructor
       static $inject = ['breeze', 'entityManagerFactory', 'common', 'model', 'app.config'];
@@ -68,6 +68,7 @@ module App.CodeCamper {
          this.resourceNames = this.model.resourceNames;
          this.entityNames = this.model.entityNames;
          this.setupEventForHasChangesChanged();
+         
       }
       //#endregion
 
@@ -216,12 +217,18 @@ module App.CodeCamper {
          var message = 'Retrieved [' + resourceName + '] from ' + (isLocal ? " Local" : "Remote") + ' resource';
          this.logSuccess(message, resultlength, true)
       }
-      public queryFailed(error: { message: string }) {
-          //var msg = this.config.appErrorPrefix + "Error retrieving Data" + error.message;
+
+      public queryFailed = (error: { message: string }) => {
           var msg = this.config.appErrorPrefix + "Error retrieving Data" + error.message;
+          this.logError(msg, error);
+          throw error;
+       }
+       /*
+      public queryFailed(error: { message: string }) {
+         var msg = this.config.appErrorPrefix + "Error retrieving Data" + error.message;
          this.logError(msg, error);
          throw error;
-      }
+      }*/
       //#endregion
    }
         
