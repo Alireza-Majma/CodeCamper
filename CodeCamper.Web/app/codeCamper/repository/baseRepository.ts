@@ -217,7 +217,8 @@ module App.CodeCamper {
          this.logSuccess(message, resultlength, true)
       }
       public queryFailed(error: { message: string }) {
-         var msg = this.config.appErrorPrefix + "Error retrieving Data" + error.message;
+          //var msg = this.config.appErrorPrefix + "Error retrieving Data" + error.message;
+          var msg = this.config.appErrorPrefix + "Error retrieving Data" + error.message;
          this.logError(msg, error);
          throw error;
       }

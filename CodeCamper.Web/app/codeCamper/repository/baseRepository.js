@@ -156,6 +156,7 @@ var App;
                 this.logSuccess(message, resultlength, true);
             };
             BaseRepository.prototype.queryFailed = function (error) {
+                //var msg = this.config.appErrorPrefix + "Error retrieving Data" + error.message;
                 var msg = this.config.appErrorPrefix + "Error retrieving Data" + error.message;
                 this.logError(msg, error);
                 throw error;
